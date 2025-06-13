@@ -11,10 +11,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Plus, Trash2, GripVertical } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import type { Database } from "@/integrations/supabase/types";
+
+type FieldType = Database["public"]["Enums"]["field_type"];
 
 interface FormField {
   id?: string;
-  field_type: string;
+  field_type: FieldType;
   label: string;
   name: string;
   placeholder?: string;
@@ -76,13 +79,13 @@ const FormBuilder = ({ onBack, formId }: FormBuilderProps) => {
           ?.sort((a: any, b: any) => a.sort_order - b.sort_order)
           .map((field: any) => ({
             id: field.id,
-            field_type: field.field_type,
+            field_type: field.field_type as FieldType,
             label: field.label,
             name: field.name,
             placeholder: field.placeholder || "",
             required: field.required,
             enabled: field.enabled,
-            options: field.options || [],
+            options: field.options as string[] || [],
             sort_order: field.sort_order,
           })) || []
       );
@@ -129,10 +132,10 @@ const FormBuilder = ({ onBack, formId }: FormBuilderProps) => {
           field_type: field.field_type,
           label: field.label,
           name: field.name,
-          placeholder: field.placeholder,
+          placeholder: field.placeholder || null,
           required: field.required,
           enabled: field.enabled,
-          options: field.options,
+          options: field.options || null,
           sort_order: index,
         }));
 
@@ -186,7 +189,7 @@ const FormBuilder = ({ onBack, formId }: FormBuilderProps) => {
     setFields(fields.filter((_, i) => i !== index));
   };
 
-  const fieldTypes = [
+  const fieldTypes: { value: FieldType; label: string }[] = [
     { value: "text", label: "Text" },
     { value: "email", label: "Email" },
     { value: "phone", label: "Phone" },
@@ -312,7 +315,7 @@ const FormBuilder = ({ onBack, formId }: FormBuilderProps) => {
                         <Label>Type</Label>
                         <Select
                           value={field.field_type}
-                          onValueChange={(value) =>
+                          onValueChange={(value: FieldType) =>
                             updateField(index, { field_type: value })
                           }
                         >
