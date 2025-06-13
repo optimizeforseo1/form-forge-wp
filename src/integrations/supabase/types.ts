@@ -9,7 +9,127 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      form_fields: {
+        Row: {
+          created_at: string | null
+          enabled: boolean | null
+          field_type: Database["public"]["Enums"]["field_type"]
+          form_id: string | null
+          id: string
+          label: string
+          name: string
+          options: Json | null
+          placeholder: string | null
+          required: boolean | null
+          sort_order: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          enabled?: boolean | null
+          field_type: Database["public"]["Enums"]["field_type"]
+          form_id?: string | null
+          id?: string
+          label: string
+          name: string
+          options?: Json | null
+          placeholder?: string | null
+          required?: boolean | null
+          sort_order?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          enabled?: boolean | null
+          field_type?: Database["public"]["Enums"]["field_type"]
+          form_id?: string | null
+          id?: string
+          label?: string
+          name?: string
+          options?: Json | null
+          placeholder?: string | null
+          required?: boolean | null
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "form_fields_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "forms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      form_submissions: {
+        Row: {
+          data: Json
+          form_id: string | null
+          id: string
+          ip_address: unknown | null
+          submitted_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          data: Json
+          form_id?: string | null
+          id?: string
+          ip_address?: unknown | null
+          submitted_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          data?: Json
+          form_id?: string | null
+          id?: string
+          ip_address?: unknown | null
+          submitted_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "form_submissions_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "forms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forms: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          notification_email: string
+          recaptcha_enabled: boolean | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          notification_email: string
+          recaptcha_enabled?: boolean | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          notification_email?: string
+          recaptcha_enabled?: boolean | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +138,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      field_type:
+        | "text"
+        | "email"
+        | "phone"
+        | "dropdown"
+        | "textarea"
+        | "checkbox"
+        | "radio"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +260,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      field_type: [
+        "text",
+        "email",
+        "phone",
+        "dropdown",
+        "textarea",
+        "checkbox",
+        "radio",
+      ],
+    },
   },
 } as const
