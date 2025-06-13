@@ -120,12 +120,15 @@ const SubmissionsList = ({ onBack }: SubmissionsListProps) => {
                         {key.replace(/_/g, " ")}:
                       </div>
                       <div className="col-span-2 text-muted-foreground">
-                        {Array.isArray(value) 
-                          ? value.join(", ") 
-                          : value != null 
-                            ? String(value) 
-                            : "N/A"
-                        }
+                        {(() => {
+                          if (Array.isArray(value)) {
+                            return value.join(", ");
+                          }
+                          if (value != null) {
+                            return String(value);
+                          }
+                          return "N/A";
+                        })()}
                       </div>
                     </div>
                   ))}
