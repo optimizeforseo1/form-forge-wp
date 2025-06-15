@@ -31,7 +31,9 @@ $submissions = $wpdb->get_results("
             <td><?php echo esc_html($sub->form_name ?: 'N/A'); ?></td>
             <td><?php echo esc_html($sub->submitted_at); ?></td>
             <td><?php echo esc_html($sub->ip_address); ?></td>
-            <td><a href="#" onclick="alert('Submission data:\n<?php echo esc_js($sub->data); ?>')">View</a></td>
+            <td>
+                <a href="#" onclick="alert('Submission data:\n<?php echo esc_js($sub->data); ?>')">View</a>
+            </td>
         </tr>
         <?php endforeach; ?>
     <?php else: ?>
