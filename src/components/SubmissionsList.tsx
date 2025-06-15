@@ -1,21 +1,38 @@
 
 import React from 'react';
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Submission {
   id: string;
-  formId: string;
+  form_id: string;
   data: Record<string, any>;
-  submittedAt: string;
+  submitted_at: string;
 }
 
 interface SubmissionsListProps {
-  submissions: Submission[];
+  onBack: () => void;
 }
 
-export const SubmissionsList: React.FC<SubmissionsListProps> = ({ submissions }) => {
+export const SubmissionsList: React.FC<SubmissionsListProps> = ({ onBack }) => {
+  const { data: submissions, isLoading } = useQuery({
+    queryKey: ["submissions"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("form_submissions")
+        .select("*")
+        .order("submitted_at", { ascending: false });
+      
+      if (error) throw error;
+      return data as Submission[];
+    },
+  });
+
   const formatValue = (value: any): React.ReactNode => {
     if (value === null || value === undefined) {
       return <span className="text-gray-400">No data</span>;
@@ -32,21 +49,40 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ submissions })
     return String(value);
   };
 
+  if (isLoading) {
+    return <div className="text-center py-8">Loading submissions...</div>;
+  }
+
   if (!submissions || submissions.length === 0) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Form Submissions</CardTitle>
-          <CardDescription>No submissions found</CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          <Button variant="outline" onClick={onBack}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back
+          </Button>
+          <h2 className="text-2xl font-bold">Form Submissions</h2>
+        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Form Submissions</CardTitle>
+            <CardDescription>No submissions found</CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
     );
   }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Form Submissions</h2>
+        <div className="flex items-center gap-4">
+          <Button variant="outline" onClick={onBack}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back
+          </Button>
+          <h2 className="text-2xl font-bold">Form Submissions</h2>
+        </div>
         <Badge variant="secondary">{submissions.length} submissions</Badge>
       </div>
       
@@ -58,12 +94,12 @@ export const SubmissionsList: React.FC<SubmissionsListProps> = ({ submissions })
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">Submission #{submission.id.slice(-8)}</CardTitle>
                   <Badge variant="outline">
-                    {new Date(submission.submittedAt).toLocaleDateString()}
+                    {new Date(submission.submitted_at).toLocaleDateString()}
                   </Badge>
                 </div>
                 <CardDescription>
-                  Form ID: {submission.formId} • 
-                  Submitted: {new Date(submission.submittedAt).toLocaleString()}
+                  Form ID: {submission.form_id} • 
+                  Submitted: {new Date(submission.submitted_at).toLocaleString()}
                 </CardDescription>
               </CardHeader>
               
