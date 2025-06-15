@@ -1,59 +1,6 @@
-
 <?php
-// Admin menu and pages
-
-add_action('admin_menu', 'afb_admin_menu');
-
-function afb_admin_menu() {
-    add_menu_page(
-        'Form Builder',
-        'Form Builder',
-        'manage_options',
-        'form-builder',
-        'afb_admin_page',
-        'dashicons-feedback',
-        30
-    );
-    
-    add_submenu_page(
-        'form-builder',
-        'All Forms',
-        'All Forms',
-        'manage_options',
-        'form-builder',
-        'afb_admin_page'
-    );
-    
-    add_submenu_page(
-        'form-builder',
-        'Add New Form',
-        'Add New Form',
-        'manage_options',
-        'form-builder-new',
-        'afb_form_builder_page'
-    );
-    
-    add_submenu_page(
-        'form-builder',
-        'Form Submissions',
-        'Submissions',
-        'manage_options',
-        'form-builder-submissions',
-        'afb_submissions_page'
-    );
-}
-
-function afb_admin_page() {
-    include AFB_PLUGIN_PATH . 'admin/pages/forms-list.php';
-}
-
-function afb_form_builder_page() {
-    include AFB_PLUGIN_PATH . 'admin/pages/form-builder.php';
-}
-
-function afb_submissions_page() {
-    include AFB_PLUGIN_PATH . 'admin/pages/submissions.php';
-}
+// This file contains AJAX handlers for the admin area.
+// Menu registration and page callbacks are handled in the main plugin file.
 
 // AJAX handlers for admin
 add_action('wp_ajax_afb_save_form', 'afb_save_form');
@@ -198,4 +145,3 @@ function afb_toggle_form() {
         wp_send_json_error();
     }
 }
-
