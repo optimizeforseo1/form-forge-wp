@@ -127,7 +127,7 @@ const SubmissionsList = ({ onBack }: SubmissionsListProps) => {
                             return String(value);
                           }
                           return "N/A";
-                        })() as string}
+                        })()}
                       </div>
                     </div>
                   ))}
