@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -128,7 +127,7 @@ const SubmissionsList = ({ onBack }: SubmissionsListProps) => {
                             return String(value);
                           }
                           return "N/A";
-                        })()}
+                        })() as string}
                       </div>
                     </div>
                   ))}
