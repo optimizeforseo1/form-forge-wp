@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Plus, Settings, BarChart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import FormBuilder from "./FormBuilder";
 import FormList from "./FormList";
-import SubmissionsList from "./SubmissionsList";
+import { SubmissionsList } from "./SubmissionsList";
 
 const AdminDashboard = () => {
   const [activeView, setActiveView] = useState("list");
