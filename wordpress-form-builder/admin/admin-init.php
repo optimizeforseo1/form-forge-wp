@@ -198,3 +198,4 @@ function afb_toggle_form() {
         wp_send_json_error();
     }
 }
+

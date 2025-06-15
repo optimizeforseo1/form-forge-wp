@@ -168,3 +168,4 @@ function afb_form_shortcode($atts) {
     <?php
     return ob_get_clean();
 }
+

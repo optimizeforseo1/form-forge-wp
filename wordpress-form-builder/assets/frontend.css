@@ -1,149 +1,62 @@
 
-/* Frontend Form Styles */
+/* Minimal styling for the frontend form builder plugin */
 .afb-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+  padding: 1.5em;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15,23,42,.04);
+  margin-bottom: 2em;
 }
-
-.afb-form-wrapper {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-}
-
 .afb-form-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: .3em;
 }
-
 .afb-form-description {
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.5;
+  color: #475569;
+  margin-bottom: 1em;
 }
-
 .afb-field-group {
-    margin-bottom: 20px;
+  margin-bottom: 1em;
 }
-
 .afb-field-label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
+  font-weight: 500;
+  margin-bottom: .4em;
+  display: block;
 }
-
-.afb-required {
-    color: #e74c3c;
-}
-
-.afb-field-input,
-.afb-field-textarea,
-.afb-field-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-}
-
-.afb-field-input:focus,
-.afb-field-textarea:focus,
-.afb-field-select:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-}
-
-.afb-radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.afb-radio-label,
-.afb-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-weight: normal;
-}
-
-.afb-radio-label input[type="radio"],
-.afb-checkbox-label input[type="checkbox"] {
-    margin: 0;
-}
-
-.afb-form-submit {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.afb-submit-btn {
-    background-color: #3498db;
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.afb-submit-btn:hover {
-    background-color: #2980b9;
-}
-
-.afb-submit-btn:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-}
-
 .afb-form-messages {
-    margin-bottom: 20px;
+  color: #d91818;
+  margin-bottom: 1em;
 }
-
-.afb-message {
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 10px;
+.afb-submit-btn {
+  color: #fff;
+  background: #0284c7;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7em 1.4em;
+  font-size: .98em;
+  margin-top: .8em;
+  cursor: pointer;
 }
-
-.afb-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+.afb-submit-btn:hover {
+  background: #0369a1;
 }
-
-.afb-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+.afb-required {
+  color: #e11d48;
 }
-
-.afb-recaptcha-info {
-    margin: 15px 0;
-    color: #666;
-    font-size: 14px;
+.afb-radio-group > .afb-radio-label {
+  display: inline-block;
+  margin-right: 1.2em;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .afb-form-container {
-        padding: 10px;
-    }
-    
-    .afb-form-wrapper {
-        padding: 20px;
-    }
-    
-    .afb-radio-group {
-        gap: 12px;
-    }
+.afb-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.afb-field-input, .afb-field-select, .afb-field-textarea {
+  font-size: 1em;
+  padding: 0.6em 0.8em;
+  border: 1px solid #e0e7ef;
+  border-radius: 4px;
+  width: 100%;
 }

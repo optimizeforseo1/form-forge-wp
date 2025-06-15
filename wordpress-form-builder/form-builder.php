@@ -107,3 +107,4 @@ function afb_enqueue_admin_scripts($hook) {
     wp_enqueue_script('afb-admin', AFB_PLUGIN_URL . 'assets/admin.js', array('jquery', 'jquery-ui-sortable'), '1.0.0', true);
     wp_enqueue_style('afb-admin', AFB_PLUGIN_URL . 'assets/admin.css', array(), '1.0.0');
 }
+

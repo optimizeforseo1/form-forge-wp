@@ -111,3 +111,4 @@ function afb_send_notification_email($form, $form_data) {
     
     wp_mail($to, $subject, $message, $headers);
 }
+
